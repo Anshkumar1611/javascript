@@ -142,3 +142,7 @@ Rules for execution context:
 
 
 # Advanced
+ 
+If you learn `Arrays ,objects and loops` in any language its becomes very easy to Work because mostly data is in the form of `Arrays `,`objects` and `loops`.So if you know how to play with these 3 it is quite easy for you .
+
+## Arrays
