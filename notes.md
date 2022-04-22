@@ -146,3 +146,180 @@ Rules for execution context:
 If you learn `Arrays ,objects and loops` in any language its becomes very easy to Work because mostly data is in the form of `Arrays `,`objects` and `loops`.So if you know how to play with these 3 it is quite easy for you .
 
 ## Arrays
+
+
+# Not Advance
+
+## Maps
+
+The Map object holds `key-value pairs` and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.
+
+```js
+const map1 = new Map();
+
+map1.set('a', 1);
+map1.set('b', 2);
+map1.set('c', 3);
+
+console.log(map1.get('a'));
+// expected output: 1
+
+map1.set('a', 97);
+
+console.log(map1.get('a'));
+// expected output: 97
+
+console.log(map1.size);
+// expected output: 3
+
+map1.delete('b');
+
+console.log(map1.size);
+// expected output: 2
+```
+
+```js
+The correct usage for storing data in the Map is through the set(key, value) method.
+
+const contacts = new Map()
+contacts.set('Jessie', {phone: "213-555-1234", address: "123 N 1st Ave"})
+contacts.has('Jessie') // true
+contacts.get('Hilary') // undefined
+contacts.set('Hilary', {phone: "617-555-4321", address: "321 S 2nd St"})
+contacts.get('Jessie') // {phone: "213-555-1234", address: "123 N 1st Ave"}
+contacts.delete('Raymond') // false
+contacts.delete('Jessie') // true
+console.log(contacts.size) // 1
+Constructor
+```
+
+## Spread syntax (...) :
+
+Spread syntax (...) allows an iterable such as an array expression or string to be expanded in places where zero or more arguments (for function calls) or elements (for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs (for object literals) are expected.
+
+```js
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(sum(...numbers));
+// expected output: 6
+
+console.log(sum.apply(null, numbers));
+// expected output: 6
+```
+
+## Classes :
+Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JS are built on prototypes but also have some syntax and semantics that are not shared with ES5 class-like semantics.
+
+## Defining classes
+Classes are in fact `special functions`, and just as you can define `function expressions and function declarations`, the class syntax has two components: `class expressions and class declarations`.
+
+## Class declarations 
+```js
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+```
+# Inheritance 
+
+```js
+
+class SubAdmin extends User {  //Inheritance = now Class SubAdmin can use every property of class User
+  constructor(name, email) {
+    super(name, email);
+  }
+  getAdminInfo() {
+    return "I am subadmin";
+  }
+  login() { //this login is returned when we call class SubAdmin eventhough we have the same function in User class But js is smart here and run the function from which class it is called .
+    return "login for admin only";
+  }
+}
+const tom = new SubAdmin("tom", "tom@jerry.com");
+console.log(tom.getAdminInfo());
+console.log(tom.login());
+```
+
+### Super_:
+The super keyword is used to access and call functions on an object's parent.
+
+The super.prop and `super[expr]` expressions are valid in any method definition in both classes and object literals.
+
+### Syntax
+super(`[arguments]`); // calls the parent constructor.
+super.functionOnParent(`[arguments]`);
+```js
+class Rectangle {
+  constructor(height, width) {
+    this.name = 'Rectangle';
+    this.height = height;
+    this.width = width;
+  }
+  sayName() {
+    console.log('Hi, I am a ', this.name + '.');
+  }
+  get area() {
+    return this.height * this.width;
+  }
+  set area(value) {
+    this._area = value;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(length) {
+    this.height; // ReferenceError, super needs to be called first!
+
+    // Here, it calls the parent class's constructor with lengths
+    // provided for the Rectangle's width and height
+    super(length, length);
+
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = 'Square';
+  }
+}
+```
+
+# Promises
+
+A Promise is a `proxy for a value` not necessarily known when the promise is created. 
+It allows you to associate handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.
+
+A Promise is in one of these states:
+
+- `pending`: initial state, neither fulfilled nor rejected.
+- `fulfilled`: meaning that the operation was completed successfully.
+- `rejected`: meaning that the operation failed.
+
+![](assets/images/promises.png)
+
+
+# Using the Fetch API
+The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
+
+The fetch specification differs from jQuery.ajax() in the following significant ways:
+
+- The Promise returned from `fetch()` won't reject on HTTP error status even if the response is an HTTP 404 or 500. Instead, as soon as the server responds with headers, the Promise will resolve normally (with the ok property of the response set to false if the response isn't in the range 200–299), and it will only reject on network failure or if anything prevented the request from completing.
+
+- Unless `fetch()` is called with the credentials option set to include, `fetch()`:
+  - `won't send cookies in cross-origin requests`
+  - `won’t set any cookies sent back in cross-origin responses`
+
+A basic fetch request is really simple to set up. Have a look at the following code:
+
+fetch('http://example.com/movies.json')
+```js
+  .then(response => response.json())
+  .then(data => console.log(data));
+  ```
+
+Here we are fetching a JSON file across the network and printing it to the console. The simplest use of fetch() takes one argument — the path to the resource you want to fetch — and does not directly return the JSON response body but instead returns a promise that resolves with a Response object.
+
+The Response object, in turn, does not directly contain the actual JSON response body but is instead a representation of the entire HTTP response. So, to extract the JSON body content from the Response object, we use the json() method, which returns a second promise that resolves with the result of parsing the response body text as JSON.
